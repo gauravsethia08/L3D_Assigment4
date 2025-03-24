@@ -54,7 +54,12 @@ def create_renders(args):
             # HINT: Set bg_colour to (1.0, 1.0, 1.0)
             # HINT: Get per_splat from args.gaussians_per_splat
             # HINT: img_size and camera are available above
-            img, depth, mask = None
+            img, depth, mask = scene.render(
+                camera=camera,
+                bg_colour=(1.0, 1.0, 1.0),
+                per_splat=args.gaussians_per_splat,
+                img_size=img_size,
+            )
 
         debug_path = os.path.join(debug_root, f"{i:03d}.png")
         img = img.detach().cpu().numpy()
@@ -113,5 +118,6 @@ def get_args():
 
 if __name__ == "__main__":
 
+    print(torch.cuda.is_available())
     args = get_args()
     create_renders(args)
