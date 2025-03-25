@@ -38,7 +38,7 @@ def setup_optimizer(gaussians):
         {'params': [gaussians.means], 'lr': 1e-4, "name": "means"},
     ]
     optimizer = torch.optim.Adam(parameters, lr=0.0, eps=1e-15)
-    optimizer = None
+    # optimizer = None
 
     return optimizer
 
@@ -108,7 +108,7 @@ def run_training(args):
         # HINT: Get img_size from train_dataset
         # HINT: Get per_splat from args.gaussians_per_splat
         # HINT: camera is available above
-        pred_img = scene.render(
+        pred_img, _, _ = scene.render(
             camera=camera, bg_colour=(0.0, 0.0, 0.0),
             img_size=train_dataset.img_size,
             per_splat=args.gaussians_per_splat
@@ -161,7 +161,7 @@ def run_training(args):
             # HINT: Get img_size from train_dataset
             # HINT: Get per_splat from args.gaussians_per_splat
             # HINT: camera is available above
-            pred_img = scene.render(
+            pred_img, _, _ = scene.render(
                 camera=camera, bg_colour=(0.0, 0.0, 0.0),
                 img_size=train_dataset.img_size,
                 per_splat=args.gaussians_per_splat
@@ -193,7 +193,7 @@ def run_training(args):
             # HINT: Get img_size from test_dataset
             # HINT: Get per_splat from args.gaussians_per_splat
             # HINT: camera is available above
-            pred_img = scene.render(
+            pred_img, _, _ = scene.render(
                 camera=camera, bg_colour=(0.0, 0.0, 0.0),
                 img_size=test_dataset.img_size,
                 per_splat=args.gaussians_per_splat
